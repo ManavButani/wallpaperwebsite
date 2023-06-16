@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+.header {
+  padding: 0;
+  background-color: dark;
+  display: flex;
+  align-items: center;
+}
+
+.header .col {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.header .col:last-child {
+  margin-right: 15;
+  margin-left: auto;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-column {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-column:last-child {
+  margin-right: 0;
+}
+
+.insider{
+  display: flex;
+  justify-content: center
+}

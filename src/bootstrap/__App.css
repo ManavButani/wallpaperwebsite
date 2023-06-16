@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 0 0 calc(50% - 10px); /* Adjust the width as needed */
+}
+
+.manav {
+  flex: 0 0 calc(50% - 10px); /* Adjust the width as needed */
+}
