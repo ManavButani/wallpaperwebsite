@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card } from 'antd'
+import { Card, Col, Row } from 'antd'
 import "./App.css"
 
 const App = () => {
@@ -49,6 +49,7 @@ const App = () => {
         <button type="submit" onClick={manageInput}>
           Add
         </button>
+
 
         <Card>
           <ul>
