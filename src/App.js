@@ -1,71 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import { Card, Col, Row } from 'antd'
-import "./App.css"
+import React, { useEffect, useState } from "react";
+import Navbar from "./component/Navbar";
+import Imagetile from "./component/Imagetile";
 
 const App = () => {
-  let [note, setNote] =useState("")
-  let [priority, setPriority] = useState(0)
-  let [stage, setStage]= useState({})
-  let [task, setTask]= useState([])
+  let [ram, setData] = useState(null);
+
+  let fetchData = async (keyword) => {
+    let res = await fetch(`https://api.pexels.com/v1/search?query=${keyword}`, {
+      headers: {
+        Authorization:
+          "QD554SWJEgyHvQ5qoug5zvVL7schQ05EHHPDnAY74k3imPZDzBXcPEcM",
+      },
+    });
+    let data = await res.json();
+    setData(data);
+  };
 
   useEffect(() => {
-    console.log(task);
-  }, [task]);
+    fetchData("tree");
+  }, []); // Empty dependency array to trigger the effect only once when the component mounts
 
-  const manageInput = () => {
-    const newStage = {
-      name: note,
-      priority: priority,
-    };
-    setStage(newStage);
+  console.log(ram);
 
-    setTask((prev) => {
-      const updatedTask = prev ? [...prev, newStage] : [newStage];
-      return updatedTask;
-    });
-  };
-
-  const handleDelete = (value) => {
-    setTask((prev) => {
-      const updatedTask = [...prev];
-      updatedTask.splice(value, 1);
-      return updatedTask;
-    });
-  };
-
-  console.log(stage, task);
   return (
     <>
-      <center>
-        <h1>Task App</h1>
-        <input
-          type="text"
-          name="todo"
-          id=""
-          onChange={(e) => {
-            setNote(e.target.value);
-          }}
-        />
-        <button type="submit" onClick={manageInput}>
-          Add
-        </button>
-
-
-        <Card>
-          <ul>
-            {task.map((val, index) => (
-              <Card key={index} className="insider">
-                {val.name}
-                <button value={index} onClick={() => handleDelete(index)}>
-                  Delete
-                </button>
-              </Card>
-            ))}
-          </ul>
-        </Card>
-      </center>
+      <Navbar fetchData={fetchData} />
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent :"center"}}>
+        {ram &&
+          ram.photos &&
+          ram.photos.map((ele) => {
+            return <Imagetile imagSrc={ele.src.medium} />;
+          })}
+      </div>
     </>
   );
-}
+};
 
-export default App
+export default App;
